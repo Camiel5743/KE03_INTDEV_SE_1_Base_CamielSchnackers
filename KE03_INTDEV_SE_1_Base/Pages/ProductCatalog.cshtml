@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Product Catalog";
 }
+
 <h1 style="
     text-align: center;
     margin-top: 20px;
@@ -23,8 +24,7 @@
         .Replace("(", "")
         .Replace(")", "")
         .Replace(".", "")
-        .Replace(",", "")
-        + ".jpg";
+        .Replace(",", "") + ".jpg";
 
         <div class="col-md-4 col-lg-3 mb-4">
             <div class="card h-100 text-dark">
@@ -32,17 +32,22 @@
                      class="card-img-top"
                      alt="@product.Name"
                      style="max-height: 250px; object-fit: cover;" />
+
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <p class="card-text">@product.Description</p>
                     <p class="card-text"><strong>€ @product.Price.ToString("0.00")</strong></p>
 
-                    <div class="mb-2">
-                        <label for="quantity_@product.Id">Aantal:</label>
-                        <input type="number" id="quantity_@product.Id" name="quantity" value="1" min="1" class="form-control" />
-                    </div>
+                    <form method="get" asp-page="/Cart">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <div class="mb-2">
+                            <label for="quantity_@product.Id">Aantal:</label>
+                            <input type="number" id="quantity_@product.Id" name="quantity" value="1" min="1" class="form-control" />
+                        </div>
 
-                    <button class="btn btn-primary w-100 mb-2">In winkelwagen</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-2">In winkelwagen</button>
+                    </form>
+
                     <button class="btn btn-success w-100">Nu bestellen</button>
                 </div>
             </div>
