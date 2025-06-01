@@ -1,6 +1,51 @@
 ﻿@page
 @model KE03_INTDEV_SE_1_Base.Pages.ProductCatalogModel
 @{
-	ViewData["Title"] = "Product Catalog.";
+    ViewData["Title"] = "Product Catalog";
 }
+<h1 style="
+    text-align: center;
+    margin-top: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+    font-size: 4em;
+    color: #e60000;
+    letter-spacing: 2px;
+    text-transform: uppercase;">
+    Onze producten!
+</h1>
 
+<div class="row justify-content-center">
+    @foreach (var product in Model.Products)
+    {
+        var imageFile = product.Name.ToLower()
+        .Replace(" ", "")
+        .Replace("-", "")
+        .Replace("(", "")
+        .Replace(")", "")
+        .Replace(".", "")
+        .Replace(",", "")
+        + ".jpg";
+
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 text-dark">
+                <img src="~/images/@imageFile"
+                     class="card-img-top"
+                     alt="@product.Name"
+                     style="max-height: 250px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text"><strong>€ @product.Price.ToString("0.00")</strong></p>
+
+                    <div class="mb-2">
+                        <label for="quantity_@product.Id">Aantal:</label>
+                        <input type="number" id="quantity_@product.Id" name="quantity" value="1" min="1" class="form-control" />
+                    </div>
+
+                    <button class="btn btn-primary w-100 mb-2">In winkelwagen</button>
+                    <button class="btn btn-success w-100">Nu bestellen</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

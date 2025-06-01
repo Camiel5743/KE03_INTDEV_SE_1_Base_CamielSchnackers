@@ -40,9 +40,13 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m },
-                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m },
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m }
+                new Product { Name = "Makita", Description = "Makita accuradio", Price = 129.99m },
+                new Product { Name = "Fietsslot", Description = "Zwaar kettingslot imbus ERT2", Price = 39.95m },
+                new Product { Name = "Fietsketting", Description = "Sterke fietsketting alluminium", Price = 19.95m },
+                new Product { Name = "Halogeenkoplamp", Description = "Heldere koplamp voor de auto", Price = 14.99m },
+                new Product { Name = "Kozijnschroeven", Description = "Set van 100 buldexen plattenkop", Price = 12.50m },
+                new Product { Name = "Coffeemakita", Description = "Makita koffiezetapparaat voor op de werkvloer", Price = 89.00m },
+
             };
             context.Products.AddRange(products);
 
