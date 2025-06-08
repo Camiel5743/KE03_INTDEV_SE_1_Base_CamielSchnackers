@@ -38,30 +38,32 @@
                     <p class="card-text">@product.Description</p>
                     <p class="card-text"><strong>€ @product.Price.ToString("0.00")</strong></p>
 
+
+                    <!-- 🛒 FORMULIER VOOR IN WINKELWAGEN -->
                     <form method="get" asp-page="/Cart">
                         <input type="hidden" name="productId" value="@product.Id" />
                         <div class="mb-2">
                             <label for="quantity_@product.Id">Aantal:</label>
                             <input type="number" id="quantity_@product.Id" name="quantity" value="1" min="1" class="form-control" />
                         </div>
-
                         <button type="submit" class="btn btn-primary w-100 mb-2">In winkelwagen</button>
                     </form>
 
-                    <form method="get" asp-page="/Checkout">
-                        <input type="hidden" name="productId" value="@product.Id" />
-                        <input type="hidden" name="quantity" id="checkout_quantity_@product.Id" />
+                    <!-- ✅ FORMULIER VOOR NU BESTELLEN -->
+                    <form method="get" action="/Checkout" class="checkout-form">
+                        <input type="hidden" name="ProductId" value="@product.Id" />
+                        <input type="hidden" name="Quantity" id="checkout_quantity_@product.Id" />
                         <button type="submit" class="btn btn-success w-100">Nu bestellen</button>
                     </form>
 
+
                     <script>
-                        
                         document.addEventListener("DOMContentLoaded", function () {
-                            document.querySelectorAll("form[asp-page='/Checkout']").forEach(form => {
+                            document.querySelectorAll("form.checkout-form").forEach(form => {
                                 form.addEventListener("submit", function () {
-                                    const productId = form.querySelector("input[name='productId']").value;
+                                    const productId = form.querySelector("input[name='ProductId']").value;
                                     const sourceQty = document.querySelector(`#quantity_${productId}`);
-                                    const targetQty = form.querySelector("input[name='quantity']");
+                                    const targetQty = form.querySelector("input[name='Quantity']`);
                                     if (sourceQty && targetQty) {
                                         targetQty.value = sourceQty.value;
                                     }
@@ -69,6 +71,22 @@
                             });
                         });
                     </script>
+
+
+                    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("form.checkout-form").forEach(form => {
+            form.addEventListener("submit", function () {
+                const productId = form.querySelector("input[name='ProductId']").value;
+                const sourceQty = document.querySelector(`#quantity_${productId}`);
+                const targetQty = form.querySelector(`#checkout_quantity_${productId}`);
+                if (sourceQty && targetQty) {
+                    targetQty.value = sourceQty.value;
+                }
+            });
+        });
+    });
+</script>
 
                 </div>
             </div>

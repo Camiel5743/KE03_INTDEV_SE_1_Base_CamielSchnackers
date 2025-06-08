@@ -4,16 +4,62 @@
     ViewData["Title"] = "Bestelling afronden";
 }
 
-<h1 style="
-    text-align: center;
-    margin-top: 20px;
-    font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
-    font-size: 4em;
-    color: #e60000;
-    letter-spacing: 2px;
-    text-transform: uppercase;">
-    Bestelling afronden
-</h1>
+<div style="background-color: white; padding: 20px; border-radius: 10px;">
+    <h1 style="
+        text-align: center;
+        margin-top: 20px;
+        font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+        font-size: 4em;
+        color: #e60000;
+        letter-spacing: 2px;
+        text-transform: uppercase;">
+        Bestelling afronden
+    </h1>
 
-<div class="container py-5" style="background-color: white; color: black; border-radius: 10px;">
+    @if (Model.Product != null)
+    {
+        var imageFile = Model.Product?.Name.ToLower()
+        .Replace(" ", "")
+        .Replace("-", "")
+        .Replace("(", "")
+        .Replace(")", "")
+        .Replace(".", "")
+        .Replace(",", "") + ".jpg";
 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Afbeelding</th>
+                    <th>Product</th>
+                    <th>Aantal</th>
+                    <th>Prijs</th>
+                    <th>Subtotaal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img src="~/images/@imageFile"
+                             alt="@Model.Product.Name"
+                             style="max-width: 100px; max-height: 100px; object-fit: cover;" />
+                    </td>
+                    <td>@Model.Product.Name</td>
+                    <td>@Model.Quantity</td>
+                    <td>€ @Model.Product.Price.ToString("0.00")</td>
+                    <td>€ @((Model.Product.Price * Model.Quantity).ToString("0.00"))</td>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+
+        <form method="post" class="mt-4">
+            <button type="submit" class="btn btn-success">Bevestig bestelling</button>
+        </form>
+    }
+    else
+    {
+        <p>Er is geen product gevonden.</p>
+    }
+</div>
