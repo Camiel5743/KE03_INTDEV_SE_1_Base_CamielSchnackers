@@ -23,10 +23,11 @@ namespace DataAccessLayer
             // - Denk aan namen van vliegtuigen            
             var customers = new Customer[]
             {
-                new Customer { Name = "Neo", Address = "123 Elm St" , Active=true},
-                new Customer { Name = "Morpheus", Address = "456 Oak St", Active = true },
-                new Customer { Name = "Trinity", Address = "789 Pine St", Active = true }
+                new Customer { Naam = "Neo", Achternaam = "Anderson", Land = "Matrix", Address = "6369AE", Postcode = "1234AB", Straatnaam = "Elm St", Huisnummer = "123", Active = true },
+                new Customer { Naam = "Morpheus", Achternaam = "Smith", Land = "Matrix", Address = "289PW", Postcode = "4567CD", Straatnaam = "Oak St", Huisnummer = "456", Active = true },
+                new Customer { Naam = "Trinity", Achternaam = "White", Land = "Matrix", Address = "1219KW" , Postcode = "7890EF", Straatnaam = "Pine St", Huisnummer = "789", Active = true }
             };
+
             context.Customers.AddRange(customers);
 
             var orders = new Order[]

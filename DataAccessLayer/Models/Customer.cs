@@ -14,12 +14,20 @@ namespace DataAccessLayer.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Naam { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        public string Achternaam { get; set; }
 
+        public string Land { get; set; }
+
+        public string Postcode { get; set; }
+
+        public string Straatnaam { get; set; }
+
+        public string Huisnummer { get; set; }
         public bool Active { get; set; }
+        public string Address { get; set; }
 
         public ICollection<Order> Orders { get; } = new List<Order>();
     }

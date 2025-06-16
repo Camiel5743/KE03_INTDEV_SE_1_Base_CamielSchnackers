@@ -1,0 +1,42 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.userinputModel
+@{
+	ViewData["Title"] = "User Information";
+}
+
+<div style="background-color: white; padding: 20px; border-radius: 10px;">
+    <h1 style="
+        text-align: center;
+        margin-top: 20px;
+        font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+        font-size: 4em;
+        color: #e60000;
+        letter-spacing: 2px;
+        text-transform: uppercase;">
+        Gegevens invullen
+    </h1>
+
+    <form method="post" style="margin-top: 30px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Veld</th>
+                    <th>Invoer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Naam</td><td><input asp-for="User.Naam" class="form-control" /></td></tr>
+                <tr><td>Achternaam</td><td><input asp-for="User.Achternaam" class="form-control" /></td></tr>
+                <tr><td>Land</td><td><input asp-for="User.Land" class="form-control" /></td></tr>
+                <tr><td>Postcode</td><td><input asp-for="User.Postcode" class="form-control" /></td></tr>
+                <tr><td>Straatnaam</td><td><input asp-for="User.Straatnaam" class="form-control" /></td></tr>
+                <tr><td>Huisnummer</td><td><input asp-for="User.Huisnummer" class="form-control" /></td></tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-success">Verzenden</button>
+        </div>
+    </form>
+</div>
+
