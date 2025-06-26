@@ -4,33 +4,43 @@
     ViewData["Title"] = "Ordergeschiedenis";
 }
 
-<h1>Ordergeschiedenis</h1>
+<div style="background-color: white; padding: 20px; border-radius: 10px;">
 
-@if (Model.Orders != null && Model.Orders.Any())
-{
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Klant</th>
-                <th>Datum</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var order in Model.Orders)
-        {
-            <tr>
-                <td>@order.Id</td>
-                <td>@order.Customer?.Naam @order.Customer?.Achternaam</td>
-                <td>@order.OrderDate.ToShortDateString()</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Er zijn nog geen bestellingen geplaatst.</p>
-}
+    <h1 style="
+        text-align: center;
+        margin-top: 20px;
+        font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
+        font-size: 4em;
+        color: springgreen;
+        letter-spacing: 2px;
+        text-transform: uppercase;">
+        Ordergeschiedenis
+    </h1>
 
-}
+    @if (Model.Orders != null && Model.Orders.Any())
+    {
+        <table class="table table-bordered table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Klant</th>
+                    <th>Datum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.Customer?.Naam @order.Customer?.Achternaam</td>
+                        <td>@order.OrderDate.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="text-align: center; font-size: 1.2em;">Er zijn nog geen bestellingen geplaatst.</p>
+    }
+</div>
