@@ -9,7 +9,7 @@
     margin-top: 20px;
     font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
     font-size: 4em;
-    color: springgreen
+    color: springgreen;
     letter-spacing: 2px;
     text-transform: uppercase;">
     your shoppingcart
@@ -27,16 +27,45 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.CartItems)
-            {
-                <tr>
-                    <td>@item.Product.Name</td>
-                    <td>@item.Quantity</td>
-                    <td>€ @item.Product.Price.ToString("0.00")</td>
-                    <td>€ @((item.Product.Price * item.Quantity).ToString("0.00"))</td>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
 
-                </tr>
-            }
+                        <td>
+                            <form method="post" asp-page-handler="DecreaseQuantity" style="display: inline;">
+                                <input type="hidden" name="productId" value="@item.Product.Id" />
+                                <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 4px;">-</button>
+                            </form>
+
+                            <span style="margin: 0 8px;">@item.Quantity</span>
+
+                            <form method="post" asp-page-handler="IncreaseQuantity" style="display: inline;">
+                                <input type="hidden" name="productId" value="@item.Product.Id" />
+                                <button type="submit" style="background-color: green; color: white; border: none; padding: 5px 10px; border-radius: 4px;">+</button>
+                            </form>
+                        </td>
+
+                        <td>€ @item.Product.Price.ToString("0.00")</td>
+                        <td>€ @((item.Product.Price * item.Quantity).ToString("0.00"))</td>
+
+                        <td>
+                        <td style="display: flex; gap: 8px;">
+                            <form method="post" asp-page-handler="RemoveItem">
+                                <input type="hidden" name="productId" value="@item.Product.Id" />
+                                <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 4px;">
+                                    Verwijder
+                                </button>
+                            </form>
+
+                            <a href="/userinput" style="background-color: green; color: white; padding: 5px 10px; border-radius: 4px; text-decoration: none;">
+                                Naar Checkout
+                            </a>
+                        </td>
+                        </td>
+                    </tr>
+                }
+
         </tbody>
     </table>
 }

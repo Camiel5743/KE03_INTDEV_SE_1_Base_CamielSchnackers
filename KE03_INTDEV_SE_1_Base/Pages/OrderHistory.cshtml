@@ -1,46 +1,63 @@
 ﻿@page
-@model KE03_INTDEV_SE_1_Base.Pages.OrderHistoryModel
+
 @{
     ViewData["Title"] = "Ordergeschiedenis";
+
+    var orders = new[]
+    {
+        new {
+            Id = 1,
+            Customer = "Neo",
+            Date = DateTime.Now.AddDays(-3).ToShortDateString(),
+            Product = "Makita Boormachine",
+            Quantity = 1,
+            Price = 49.99m
+        },
+        new {
+            Id = 2,
+            Customer = "Trinity",
+            Date = DateTime.Now.AddDays(-2).ToShortDateString(),
+            Product = "Fietsketting",
+            Quantity = 2,
+            Price = 29.99m
+        },
+        new {
+            Id = 3,
+            Customer = "Hamer",
+            Date = DateTime.Now.AddDays(-1).ToShortDateString(),
+            Product = "Hoed",
+            Quantity = 1,
+            Price = 24.99m
+        }
+    };
 }
 
-<div style="background-color: white; padding: 20px; border-radius: 10px;">
-
-    <h1 style="
-        text-align: center;
-        margin-top: 20px;
-        font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
-        font-size: 4em;
-        color: springgreen;
-        letter-spacing: 2px;
-        text-transform: uppercase;">
+<div style="background: white; padding: 20px; border-radius: 10px;">
+    <h1 style="text-align: center; font-family: Impact, sans-serif; font-size: 3em; color: springgreen;">
         Ordergeschiedenis
     </h1>
 
-    @if (Model.Orders != null && Model.Orders.Any())
-    {
-        <table class="table table-bordered table-striped mt-4">
-            <thead>
+    <table class="table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Klant</th>
+                <th>Datum</th>
+                <th>Product</th>
+                <th>Totaal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
                 <tr>
-                    <th>Order ID</th>
-                    <th>Klant</th>
-                    <th>Datum</th>
+                    <td>@order.Id</td>
+                    <td>@order.Customer</td>
+                    <td>@order.Date</td>
+                    <td>@order.Product x @order.Quantity</td>
+                    <td>€ @(order.Price * order.Quantity)</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in Model.Orders)
-                {
-                    <tr>
-                        <td>@order.Id</td>
-                        <td>@order.Customer?.Naam @order.Customer?.Achternaam</td>
-                        <td>@order.OrderDate.ToShortDateString()</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p style="text-align: center; font-size: 1.2em;">Er zijn nog geen bestellingen geplaatst.</p>
-    }
+            }
+        </tbody>
+    </table>
 </div>

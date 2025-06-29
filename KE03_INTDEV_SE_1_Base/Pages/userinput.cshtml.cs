@@ -15,7 +15,6 @@ namespace KE03_INTDEV_SE_1_Base.Pages
 
         public IActionResult OnPost()
         {
-            // Hier kun je iets doen met de data, zoals opslaan of tonen
             return Page();
         }
     }
