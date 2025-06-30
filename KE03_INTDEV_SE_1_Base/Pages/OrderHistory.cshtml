@@ -1,40 +1,12 @@
 ﻿@page
-
+@model OrderHistoryModel
 @{
-    ViewData["Title"] = "Ordergeschiedenis";
-
-    var orders = new[]
-    {
-        new {
-            Id = 1,
-            Customer = "Neo",
-            Date = DateTime.Now.AddDays(-3).ToShortDateString(),
-            Product = "Makita Boormachine",
-            Quantity = 1,
-            Price = 49.99m
-        },
-        new {
-            Id = 2,
-            Customer = "Trinity",
-            Date = DateTime.Now.AddDays(-2).ToShortDateString(),
-            Product = "Fietsketting",
-            Quantity = 2,
-            Price = 29.99m
-        },
-        new {
-            Id = 3,
-            Customer = "Hamer",
-            Date = DateTime.Now.AddDays(-1).ToShortDateString(),
-            Product = "Hoed",
-            Quantity = 1,
-            Price = 24.99m
-        }
-    };
+    ViewData["Title"] = "Order geschiedenis";
 }
 
 <div style="background: white; padding: 20px; border-radius: 10px;">
     <h1 style="text-align: center; font-family: Impact, sans-serif; font-size: 3em; color: springgreen;">
-        Ordergeschiedenis
+        Order geschiedenis
     </h1>
 
     <table class="table table-bordered table-striped mt-4">
@@ -43,19 +15,26 @@
                 <th>Order</th>
                 <th>Klant</th>
                 <th>Datum</th>
-                <th>Product</th>
-                <th>Totaal</th>
+                <th>Product(en)</th>
+                <th>Totale Prijs</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var order in orders)
+            @foreach (var order in Model.Orders)
             {
                 <tr>
                     <td>@order.Id</td>
                     <td>@order.Customer</td>
-                    <td>@order.Date</td>
-                    <td>@order.Product x @order.Quantity</td>
-                    <td>€ @(order.Price * order.Quantity)</td>
+                    <td>@order.Date.ToShortDateString()</td>
+                    <td>
+                        <ul>
+                            @foreach (var p in order.Products)
+                            {
+                                <li>@p.Name (€ @p.Price)</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>€ @order.Products.Sum(p => p.Price)</td>
                 </tr>
             }
         </tbody>

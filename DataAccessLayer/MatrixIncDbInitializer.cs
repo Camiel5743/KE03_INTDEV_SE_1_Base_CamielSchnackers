@@ -16,11 +16,7 @@ namespace DataAccessLayer
             {
                 return;   // DB has been seeded
             }
-
-            // TODO: Hier moet ik nog wat namen verzinnen die betrekking hebben op de matrix.
-            // - Denk aan de m3 boutjes, moertjes en ringetjes.
-            // - Denk aan namen van schepen
-            // - Denk aan namen van vliegtuigen            
+         
             var customers = new Customer[]
             {
                 new Customer { Naam = "Neo", Achternaam = "Anderson", Land = "Matrix", Address = "6369AE", Postcode = "1234AB", Straatnaam = "Elm St", Huisnummer = "123", Active = true },
@@ -39,6 +35,7 @@ namespace DataAccessLayer
             };  
             context.Orders.AddRange(orders);
 
+
             var products = new Product[]
             {
                 new Product { Name = "Makita", Description = "Makita accuradio", Price = 129.99m },
@@ -50,6 +47,13 @@ namespace DataAccessLayer
 
             };
             context.Products.AddRange(products);
+
+            // Koppel producten aan orders
+            orders[0].Products.Add(products[0]); // Makita
+            orders[0].Products.Add(products[5]); // Coffeemakita
+            orders[1].Products.Add(products[1]); // Fietsslot
+            orders[2].Products.Add(products[2]); // Fietsketting
+            orders[3].Products.Add(products[3]); // Halogeenkoplamp
 
             var parts = new Part[]
             {
